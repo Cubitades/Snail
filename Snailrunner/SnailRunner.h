@@ -98,19 +98,21 @@ public:
 	//
 	/******************************************************************************/
 	// color values
-	int white = 1100;
-	int black = 1900;
-	int grey = 1400;
+	int white = 150;
+	int black = 2000;
+	int grey = 870;
 
 	// threshold values Farbsensor unten
-	int threshold_grey_low = 935;//1500;
-	int threshold_grey_high = 1932;//1600;
+	int threshold_grey_low = 510;
+	int threshold_grey_high = 1450;
 	int threshold_distance= 10;
 	int threshold_distance_side_close = 5;
 	int threshold_distance_side_far = 18;
 	int threshold_distance_no_side = 20;
 
-	vector<int> greyvalues;
+	//vector<int> greyvalues;
+	queue<int> graydient;
+	int last_Gradient;
 
 
 	/******************************************************************************/
@@ -125,10 +127,10 @@ public:
 
 	//  1 - clockwise
 	// -1 - counterclockwise
-	int direction = -1;
+	int direction = 1;
 
 	// amount of laps
-	int lap_amount = 1;		// SollRunde
+	int lap_amount = 2;		// SollRunde
 	int corner_amount = 0;  // SollEcken
 
 	/******************************************************************************/
@@ -180,10 +182,10 @@ private:
 	/*! Letzter Farbwert; wird benötigt um Erreichen von Schwellenwert zu bestimmen. */
 	int last_colour_back;
 	int last_colour_down;	
-	int last_last_colour_down = 0;
 
 	/*! Letzter Distanzwert; dito. */
 	int last_dis;
+
 	// Letzter Distanz rechter Sensor
 	int last_dis_side; 
 

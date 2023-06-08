@@ -211,10 +211,27 @@ void RotationControl(SnailRunner* robot /*runner*/) {
 void menue() {
 	bool done=false;
 
-	/* --Ask for the configuration. */
+	/* --Ask for the configuration. */ 
+
+	//https://patorjk.com/software/taag/#p=display&w=%20&f=Stop&t=Osna%0ADynamics
+cout << "  _____                                       " << endl;
+cout << " / ___ \\                                      " << endl;
+cout << "| |   | | ___ ____   ____                     " << endl;
+cout << "| |   | |/___)  _ \\ / _  |                    " << endl;
+cout << "| |___| |___ | | | ( ( | |                    " << endl;
+cout << " \\_____/(___/|_| |_|\\_||_|                    " << endl;
+cout << "                                              " << endl;
+cout << " _____                           _            " << endl;
+cout << "(____ \\                         (_)           " << endl;
+cout << " _   \\ \\ _   _ ____   ____ ____  _  ____  ___ " << endl;
+cout << "| |   | | | | |  _ \\ / _  |    \\| |/ ___)/___)" << endl;
+cout << "| |__/ /| |_| | | | ( ( | | | | | ( (___|___ |" << endl;
+cout << "|_____/  \\__  |_| |_|\\_||_|_|_|_|_|\\____|___/ " << endl;
+cout << "        (____/                                " << endl;
+
+
 	cout << "Hochschule Osnabrueck, Sommersemester 2023\n\n"
 		 << "Software-Engineering fuer Elektrotechnik \n"
-		 << "Programmiervorlage SNAIL RUNNER\n"
 	     << endl << endl;
 	
 	cout << "Bluetooth/COM Configuration (0..): " << flush;
@@ -236,19 +253,34 @@ void menue() {
 	while (!done) {
 		// --Clear the screen and wait for input by the user.
 		system("cls");
-		cout << "Hochschule Osnabrueck, Sommersemester 2023\n\n"
-			<< "Software-Engineering fuer Elektrotechnik \n"
-			<< "Programmiervorlage SNAIL RUNNER\n"
-			<< endl;
-
+		//cout << "Hochschule Osnabrueck, Sommersemester 2023\n\n"
+		//	 << "Software-Engineering fuer Elektrotechnik \n" << endl;
+		
 		txsuper->display(); // Nur den Roboter-Namen TX-5xx ausgeben
 
 		double val=0.0;
 		RunUnit unit=IMPULSE;
 
-		cout << "\n [K] Kalibierung \n"
+	cout << "    _                _ _               " << endl;
+	cout << "   | |              (_) |              " << endl;
+	cout << "    \\ \\  ____   ____ _| |              " << endl;
+	cout << "     \\ \\|  _ \\ / _  | | |              " << endl;
+	cout << " _____) ) | | ( ( | | | |              " << endl;
+	cout << "(______/|_| |_|\\_||_|_|_|              " << endl;
+	cout << "                                       " << endl;
+	cout << " ______                                " << endl;
+	cout << "(_____ \\                               " << endl;
+	cout << " _____) )_   _ ____  ____   ____  ____ " << endl;
+	cout << "(_____ (| | | |  _ \\|  _ \\ / _  )/ ___)" << endl;
+	cout << "      | | |_| | | | | | | ( (/ /| |    " << endl;
+	cout << "      |_|\\____|_| |_|_| |_|\\____)_|    " << endl;
+                                       
+
+		cout << "\n [K] Kalibrierung \n"
 			<< " [E] Einstellungen \n"
 			<< " [S] Staffellauf \n"
+			<< " --------------------------------\n"
+			<< " [Q] Quit \n"
 			<< " Eingabe: "
 			<< endl;
 		char input ;
@@ -279,6 +311,11 @@ void menue() {
 				<< "Enter 'OK' to stop: " << flush;
 			cin >> dummy;
 			StopSupervision();
+			break;
+		case 'q': 
+			done = true;
+			cin >> dummy;
+
 			break;
 		};
 

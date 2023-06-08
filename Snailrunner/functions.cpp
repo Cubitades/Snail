@@ -8,126 +8,124 @@
 
 void calibrationMenu(SnailRunner* robot)
 {
-    bool calibration_done = false;
+	bool calibration_done = false;
 
-    while (!calibration_done)
-    {
-        system("cls");
-        unsigned choice = 0;
+	while (!calibration_done)
+	{
+		system("cls");
+		unsigned choice = 0;
 
-        std::cout << "--- SCHWELLWERT MENU ---" << std::endl;
-        std::cout << "[1] - aktuelle Schwellwerte anzeigen" << std::endl;
-        std::cout << "[2] - Schwellwerte aendern" << std::endl;
-        std::cout << "[3] - automatische Kalibrierung" << std::endl;
-        std::cout << "[4] - Schwellwerte speichern" << std::endl;
-        std::cout << "[5] - Schwellwerte laden" << std::endl;
-        std::cout << "[6] - Beenden" << std::endl;
-        std::cout << "Eingabe: ";
+		std::cout << "--- SCHWELLWERT MENU ---" << std::endl;
+		std::cout << "[1] - aktuelle Schwellwerte anzeigen" << std::endl;
+		std::cout << "[2] - Schwellwerte aendern" << std::endl;
+		std::cout << "[3] - automatische Kalibrierung" << std::endl;
+		std::cout << "[4] - Schwellwerte speichern" << std::endl;
+		std::cout << "[5] - Schwellwerte laden" << std::endl;
+		std::cout << "[6] - Beenden" << std::endl;
+		std::cout << "Eingabe: ";
 
-        std::cin >> choice;
+		std::cin >> choice;
 
-        switch (choice)
-        {
-        case 1: // show current threshold values
-        {
-            std::cout << std::endl;
-            std::cout << "--- Aktuelle Schwellwerte ---" << std::endl;
-            std::cout << "Untere Graugrenze:   " << robot->threshold_grey_low << std::endl;
-            std::cout << "oberere Graugrenze: " << robot->threshold_grey_high << std::endl;
+		switch (choice)
+		{
+		case 1: // show current threshold values
+		{
+			std::cout << std::endl;
+			std::cout << "--- Aktuelle Schwellwerte ---" << std::endl;
+			std::cout << "Untere Graugrenze:   " << robot->threshold_grey_low << std::endl;
+			std::cout << "oberere Graugrenze: " << robot->threshold_grey_high << std::endl;
 			std::cout << "Distanzsensor vorne: " << robot->threshold_distance << std::endl;
 			std::cout << "Distanzsensor rechts: " << robot->threshold_distance_no_side << std::endl;
 
-            // std::cout << "grau:    " << grey << std::endl;
-            std::cout << std::endl;
+			std::cout << std::endl;
 
-            std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-            std::string dummy;
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
+			std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+			std::string dummy;
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case 2: // change threshold values manually
-        {
-            int threshold_choice = 0;
-            std::cout << std::endl;
-            std::cout << "--- Schwellwerte manuell aendern ---" << std::endl;
-            std::cout << "Welche Werte sollen geaendert werden?" << std::endl;
-            std::cout << "[1] - unterer Graubereich" << std::endl;
-            std::cout << "[2] - oberer Graubereich" << std::endl;
+		case 2: // change threshold values manually
+		{
+			int threshold_choice = 0;
+			std::cout << std::endl;
+			std::cout << "--- Schwellwerte manuell aendern ---" << std::endl;
+			std::cout << "Welche Werte sollen geaendert werden?" << std::endl;
+			std::cout << "[1] - unterer Graubereich" << std::endl;
+			std::cout << "[2] - oberer Graubereich" << std::endl;
 			std::cout << "[3] - Distanzsensor vorne" << std::endl;
 			std::cout << "[4] - Distanzsensor rechts" << std::endl;
-            // std::cout << "[3] - grau" << std::endl;
 
-            std::cin >> threshold_choice;
+			std::cin >> threshold_choice;
 
-            if (threshold_choice == 1)
-            {
-                unsigned temp = 0;
-                std::cout << std::endl;
-                std::cout << " --- Unterer Graubereich --- " << std::endl;
-                std::cout << "aktueller Wert: " << robot->threshold_grey_low << std::endl;
-                std::cout << "neuer Wert:     ";
+			if (threshold_choice == 1)
+			{
+				unsigned temp = 0;
+				std::cout << std::endl;
+				std::cout << " --- Unterer Graubereich --- " << std::endl;
+				std::cout << "aktueller Wert: " << robot->threshold_grey_low << std::endl;
+				std::cout << "neuer Wert:     ";
 
-                do
-                {
-                    if (temp > 3000)
-                    {
-                        std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
-                        std::cout << "neuer Wert:     ";
-                    }
+				do
+				{
+					if (temp > 3000)
+					{
+						std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
+						std::cout << "neuer Wert:     ";
+					}
 
-                    std::cin >> temp;
-                } while (temp > 3000);
+					std::cin >> temp;
+				} while (temp > 3000);
 
-                robot->threshold_grey_low = temp;
-            }
+				robot->threshold_grey_low = temp;
+			}
 
-            else if (threshold_choice == 2)
-            {
-                unsigned temp = 0;
-                std::cout << std::endl;
-                std::cout << " --- Oberer Graubereich --- " << std::endl;
-                std::cout << "aktueller Wert: " << robot->threshold_grey_high << std::endl;
-                std::cout << "neuer Wert:     ";
+			else if (threshold_choice == 2)
+			{
+				unsigned temp = 0;
+				std::cout << std::endl;
+				std::cout << " --- Oberer Graubereich --- " << std::endl;
+				std::cout << "aktueller Wert: " << robot->threshold_grey_high << std::endl;
+				std::cout << "neuer Wert:     ";
 
-                do
-                {
-                    if (temp > 3000)
-                    {
-                        std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
-                        std::cout << "neuer Wert:     ";
-                    }
+				do
+				{
+					if (temp > 3000)
+					{
+						std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
+						std::cout << "neuer Wert:     ";
+					}
 
-                    std::cin >> temp;
-                } while (temp > 3000);
+					std::cin >> temp;
+				} while (temp > 3000);
 
-                robot->threshold_grey_high = temp;
-            }
+				robot->threshold_grey_high = temp;
+			}
 
-            else if (threshold_choice == 3)
-            {
-                unsigned temp = 0;
-                std::cout << " --- Distanzsensor vorne --- " << std::endl;
-                std::cout << "aktueller Wert: " << robot->threshold_distance << std::endl;
-                std::cout << "neuer Wert:     ";
+			else if (threshold_choice == 3)
+			{
+				unsigned temp = 0;
+				std::cout << " --- Distanzsensor vorne --- " << std::endl;
+				std::cout << "aktueller Wert: " << robot->threshold_distance << std::endl;
+				std::cout << "neuer Wert:     ";
 
-                do
-                {
-                    if (temp > 30)
-                    {
-                        std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
-                        std::cout << "neuer Wert:     ";
-                    }
+				do
+				{
+					if (temp > 30)
+					{
+						std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
+						std::cout << "neuer Wert:     ";
+					}
 
-                    std::cin >> temp;
-                } while (temp > 3000);
+					std::cin >> temp;
+				} while (temp > 3000);
 
-                robot->threshold_distance = temp;
-            }
+				robot->threshold_distance = temp;
+			}
 
 			else if (threshold_choice == 4)
 			{
@@ -149,85 +147,85 @@ void calibrationMenu(SnailRunner* robot)
 
 				robot->threshold_distance_no_side = temp;
 			}
-            break;
-        }
+			break;
+		}
 
-        case 3: // calibration
-        {
-            unsigned color_choice = 0;
-            int measurement_amount = 100;
-            std::string dummy;
-            std::vector<int> values;
-            unsigned sum = 0;
-            unsigned average = 0;
+		case 3: // calibration
+		{
+			unsigned color_choice = 0;
+			int measurement_amount = 100;
+			std::string dummy;
+			std::vector<int> values;
+			unsigned sum = 0;
+			unsigned average = 0;
 
-            std::cout << std::endl;
-            std::cout << "--- Kalibrierung ---" << std::endl;
-            std::cout << "Der Roboter muss auf weissen Untergrund gestellt werden. Bereit? Tippe ok." << std::endl;
+			std::cout << std::endl;
+			std::cout << "--- Kalibrierung ---" << std::endl;
+			std::cout << "Der Roboter muss auf weissen Untergrund gestellt werden. Bereit? Tippe ok." << std::endl;
 
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
-			//DURCHSCHNITT WEISS UND IN WEISS VARIABLE SPEICHERN
+			//take average of white save it to white variable
 			// drive, take measurements, sum up and save average to while variable
-            robot->forward(0.5, METER);
-            for (int i = 0; i < measurement_amount; i++)//=
-            {
-                values.push_back(robot->colourdown().value());
-				WaitUntilIsOver(20);
-            }
-
-            for (int i = 0; i < measurement_amount; i++)//=
-            {
-                sum += values.at(i);
-            }
-
-            average = sum / (measurement_amount);
-            robot->white = average;
-
-			
-            std::cout << "Durchschnitt weiss: " << average << std::endl;
-
-            // Werte zuruecksetzen fuer naechste Kalibrierung
-            dummy = "0";
-            sum = 0;
-            average = 0;
-            values.clear();
-
-            std::cout << "Der Roboter muss auf schwarzen Untergrund gestellt werden. Bereit? Tippe ok." << std::endl;
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
-
-			dummy = "nichtok";
-
-			//DURCHSCHNITT SCHWARZ UND IN SCHWARZ VARIABLE SPEICHERN
-			// drive, take measurements, sum up and save average to while variable
-            robot->forward(0.5, METER);
-            for (int i = 0; i < measurement_amount; i++)//=
-            {
+			robot->forward(0.5, METER);
+			for (int i = 0; i < measurement_amount; i++)
+			{
 				values.push_back(robot->colourdown().value());
 				WaitUntilIsOver(20);
-            }
+			}
 
-            for (int i = 0; i < measurement_amount; i++)//=
-            {
-                sum += values.at(i);
-            }
+			for (int i = 0; i < measurement_amount; i++)
+			{
+				sum += values.at(i);
+			}
 
-            average = sum / (measurement_amount);
-            robot->black = average;
+			average = sum / (measurement_amount);
+			robot->white = average;
+
+
+			std::cout << "Durchschnitt weiss: " << average << std::endl;
+
+			// reset values for next calibration
+			dummy = "0";
+			sum = 0;
+			average = 0;
+			values.clear();
+
+			std::cout << "Der Roboter muss auf schwarzen Untergrund gestellt werden. Bereit? Tippe ok." << std::endl;
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
 			dummy = "nichtok";
 
-			
+			//take average of black save it to black variable
+			// drive, take measurements, sum up and save average to while variable
+			robot->forward(0.5, METER);
+			for (int i = 0; i < measurement_amount; i++)
+			{
+				values.push_back(robot->colourdown().value());
+				WaitUntilIsOver(20);
+			}
 
-            std::cout << "Durchschnitt schwarz: " << average << std::endl;
+			for (int i = 0; i < measurement_amount; i++)
+			{
+				sum += values.at(i);
+			}
 
-			// Werte zuruecksetzen fuer naechste Kalibrierung
+			average = sum / (measurement_amount);
+			robot->black = average;
+
+			dummy = "nichtok";
+
+
+
+			std::cout << "Durchschnitt schwarz: " << average << std::endl;
+
+			// reset values for next calibration
 			dummy = "0";
 			sum = 0;
 			average = 0;
@@ -241,8 +239,8 @@ void calibrationMenu(SnailRunner* robot)
 
 			dummy = "nichtok";
 
-			//DURCHSCHNITT GRAU UND IN GRAU VARIABLE SPEICHERN
-			// drive, take measurements, sum up and save average to while variable
+			//take average of grey save it to grey variable
+			// drive, take measurements, sum up and save average to variable
 			robot->forward(0.5, METER);
 			for (int i = 0; i < measurement_amount; i++)//=
 			{
@@ -263,83 +261,82 @@ void calibrationMenu(SnailRunner* robot)
 
 
 			std::cout << "Durchschnitt grau: " << average << std::endl;
-			std::cout << "Schwellwerte werden berechnet... "  << std::endl;
+			std::cout << "Schwellwerte werden berechnet... " << std::endl;
 
-            //robot->grey =(robot->black + robot->white)/2;
-           robot->threshold_grey_low = (robot->grey + robot->white)/2 + 500;
-           robot->threshold_grey_high = (robot->grey + robot->black)/2;
+			robot->threshold_grey_low = (robot->grey + robot->white) / 2;
+			robot->threshold_grey_high = (robot->grey + robot->black) / 2;
 
-		   std::cout << "Grau/Weiss: " << robot->threshold_grey_low << std::endl;
-		   std::cout << "Grau/Schwarz: "<< robot->threshold_grey_high << std::endl;
-            std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
+			std::cout << "Grau/Weiss: " << robot->threshold_grey_low << std::endl;
+			std::cout << "Grau/Schwarz: " << robot->threshold_grey_high << std::endl;
+			std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case 4: // save threshold values into file
-        {
-            std::cout << std::endl;
-            std::cout << "--- Speichern in Datei ---" << std::endl;
-            std::cout << "Die aktuellen Schwellwerte werden in einer Datei (threshold_values.txt) gespeichert." << std::endl;
+		case 4: // save threshold values into file
+		{
+			std::cout << std::endl;
+			std::cout << "--- Speichern in Datei ---" << std::endl;
+			std::cout << "Die aktuellen Schwellwerte werden in einer Datei (threshold_values.txt) gespeichert." << std::endl;
 
-            std::ofstream file("threshold_values.txt");
+			std::ofstream file("threshold_values.txt");
 
-            file << robot->threshold_grey_low << std::endl;
-            file << robot->threshold_grey_high << std::endl;
+			file << robot->threshold_grey_low << std::endl;
+			file << robot->threshold_grey_high << std::endl;
 			file << robot->threshold_distance << std::endl;
 			file << robot->threshold_distance_no_side << std::endl;
 
 
-            file.close();
+			file.close();
 
-            std::cout << "Werte wurden gespeichert." << std::endl;
+			std::cout << "Werte wurden gespeichert." << std::endl;
 
-            std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-            std::string dummy;
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
+			std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+			std::string dummy;
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case 5: // read threshold values from file
-        {
-            std::cout << std::endl;
-            std::cout << "--- Aus Datei einlesen ---" << std::endl;
+		case 5: // read threshold values from file
+		{
+			std::cout << std::endl;
+			std::cout << "--- Aus Datei einlesen ---" << std::endl;
 
-            std::ifstream file("threshold_values.txt");
-            if (!file)
-            {
-                std::cerr << "Error: Datei konnte nicht geoeffnet werden. Standardwerte werden geladen." << std::endl;
+			std::ifstream file("threshold_values.txt");
+			if (!file)
+			{
+				std::cerr << "Error: Datei konnte nicht geoeffnet werden. Standardwerte werden geladen." << std::endl;
 
-                robot->threshold_grey_low =  1500;
-                robot->threshold_grey_high = 1600;
+				robot->threshold_grey_low = 500;
+				robot->threshold_grey_high = 1450;
 				robot->threshold_distance = 10;
 				robot->threshold_distance_no_side = 30;
 
-                std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-                std::string dummy;
-                while (dummy != "ok")
-                {
-                    std::cin >> dummy;
-                }
-            }
-            else // read from file line by line and store values in variables
-            {
-                std::string temp;
-                std::getline(file, temp);
-                robot->threshold_grey_low = stoi(temp);
-                std::cout << "untere Graugrenze: " << temp << std::endl;
+				std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+				std::string dummy;
+				while (dummy != "ok")
+				{
+					std::cin >> dummy;
+				}
+			}
+			else // read from file line by line and store values in variables
+			{
+				std::string temp;
+				std::getline(file, temp);
+				robot->threshold_grey_low = stoi(temp);
+				std::cout << "untere Graugrenze: " << temp << std::endl;
 
-                std::getline(file, temp);
-                robot->threshold_grey_high = stoi(temp);
-                std::cout << "obere Graugrenze: " << temp << std::endl;
+				std::getline(file, temp);
+				robot->threshold_grey_high = stoi(temp);
+				std::cout << "obere Graugrenze: " << temp << std::endl;
 
 				std::getline(file, temp);
 				robot->threshold_distance = stoi(temp);
@@ -351,32 +348,32 @@ void calibrationMenu(SnailRunner* robot)
 
 
 
-                file.close();
+				file.close();
 
-                std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-                std::string dummy;
-                while (dummy != "ok")
-                {
-                    std::cin >> dummy;
-                }
-            }
+				std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+				std::string dummy;
+				while (dummy != "ok")
+				{
+					std::cin >> dummy;
+				}
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case 6: // end calibration
-        {
-            calibration_done = true;
-            break;
-        }
+		case 6: // end calibration
+		{
+			calibration_done = true;
+			break;
+		}
 
-        default: // capture wrong input
-        {
-            std::cout << "Ungueltige Eingabe" << std::endl;
-            break;
-        }
-        }
-    }
+		default: // capture wrong input
+		{
+			std::cout << "Ungueltige Eingabe" << std::endl;
+			break;
+		}
+		}
+	}
 }
 
 /**********************************************************************************/
@@ -387,132 +384,132 @@ void calibrationMenu(SnailRunner* robot)
 
 void settingsMenu(SnailRunner* robot)
 {
-    bool settings_done = false;
+	bool settings_done = false;
 
-    while (!settings_done)
-    {
-        system("cls");
-        unsigned choice = 0;
+	while (!settings_done)
+	{
+		system("cls");
+		unsigned choice = 0;
 
-        std::cout << "--- EINSTELLUNGEN ---" << std::endl;
-        std::cout << "[1] - Startposition" << std::endl;
-        std::cout << "[2] - Fahrtrichtung" << std::endl;
-        std::cout << "[3] - Rundenanzahl" << std::endl;
-        std::cout << "[4] - Beenden" << std::endl;
-        std::cout << "Eingabe: ";
+		std::cout << "--- EINSTELLUNGEN ---" << std::endl;
+		std::cout << "[1] - Startposition" << std::endl;
+		std::cout << "[2] - Fahrtrichtung" << std::endl;
+		std::cout << "[3] - Rundenanzahl" << std::endl;
+		std::cout << "[4] - Beenden" << std::endl;
+		std::cout << "Eingabe: ";
 
-        std::cin >> choice;
+		std::cin >> choice;
 
-        switch (choice)
-        {
-        case 1: // runner/follower
-        {
-            std::cout << std::endl;
-            std::cout << "--- STARTPOSITION ---" << std::endl;
-            std::cout << "Welche Position hat der Runner?" << std::endl;
-            std::cout << "[1] - Startlaeufer" << std::endl;
-            std::cout << "[0] - Weiterlaeufer" << std::endl;
+		switch (choice)
+		{
+		case 1: // runner/follower
+		{
+			std::cout << std::endl;
+			std::cout << "--- STARTPOSITION ---" << std::endl;
+			std::cout << "Welche Position hat der Runner?" << std::endl;
+			std::cout << "[1] - Startlaeufer" << std::endl;
+			std::cout << "[0] - Weiterlaeufer" << std::endl;
 
-            std::cin >> robot->start_position;
+			std::cin >> robot->start_position;
 
-            if (robot->start_position)
-            {
-                std::cout << "Der Runner startet als Startlaeufer" << std::endl;
-            }
-            else
-            {
-                std::cout << "Der Runner startet als Weiterlaeufer" << std::endl;
-            }
+			if (robot->start_position)
+			{
+				std::cout << "Der Runner startet als Startlaeufer" << std::endl;
+			}
+			else
+			{
+				std::cout << "Der Runner startet als Weiterlaeufer" << std::endl;
+			}
 
-            std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-            std::string dummy;
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
+			std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+			std::string dummy;
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case 2: // direction - clockwise/counterclockwise
-        {
-            std::cout << std::endl;
-            std::cout << "--- RICHTUNG WAEHLEN ---" << std::endl;
-            std::cout << "Soll der Runner im Uhrzeigersinn oder gegen den Uhrzeigersinn fahren?" << std::endl;
-            std::cout << "[1] - im Uhrzeigersinn" << std::endl;
-            std::cout << "[0] - gegen den Uhrzeigersinn" << std::endl;
+		case 2: // direction - clockwise/counterclockwise
+		{
+			std::cout << std::endl;
+			std::cout << "--- RICHTUNG WAEHLEN ---" << std::endl;
+			std::cout << "Soll der Runner im Uhrzeigersinn oder gegen den Uhrzeigersinn fahren?" << std::endl;
+			std::cout << "[1] - im Uhrzeigersinn" << std::endl;
+			std::cout << "[0] - gegen den Uhrzeigersinn" << std::endl;
 
 			bool temp = 1;
 
-            std::cin >> temp;
+			std::cin >> temp;
 
-            if (temp)
-            {
+			if (temp)
+			{
 				robot->direction = 1;
-                std::cout << "Der Runner faehrt jetzt im Uhrzeigersinn" << std::endl;
-            }
-            else
-            {
+				std::cout << "Der Runner faehrt jetzt im Uhrzeigersinn" << std::endl;
+			}
+			else
+			{
 				robot->direction = -1;
-                std::cout << "Der Runner faehrt jetzt gegen den Uhrzeigersinn" << std::endl;
-            }
+				std::cout << "Der Runner faehrt jetzt gegen den Uhrzeigersinn" << std::endl;
+			}
 
-            std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-            std::string dummy;
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
+			std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+			std::string dummy;
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case 3: // amount of laps
-        {
-            unsigned temp = 1;
-            std::cout << std::endl;
-            std::cout << "--- RUNDENANZAHL ---" << std::endl;
-            std::cout << "Wie viele Runden soll der Runner fahren?" << std::endl;
-            std::cout << "Rundenanzahl: ";
+		case 3: // amount of laps
+		{
+			unsigned temp = 1;
+			std::cout << std::endl;
+			std::cout << "--- RUNDENANZAHL ---" << std::endl;
+			std::cout << "Wie viele Runden soll der Runner fahren?" << std::endl;
+			std::cout << "Rundenanzahl: ";
 
-            do
-            {
-                if (temp > 2 || temp == 0)
-                {
-                    std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
-                    std::cout << "Rundenanzahl: ";
-                }
+			do
+			{
+				if (temp > 2 || temp == 0)
+				{
+					std::cout << "Wert liegt nicht im gueltigen Bereich." << std::endl;
+					std::cout << "Rundenanzahl: ";
+				}
 
-                std::cin >> temp;
-            } while (temp > 2 || temp == 0);
+				std::cin >> temp;
+			} while (temp > 2 || temp == 0);
 
-            robot->lap_amount = temp;
+			robot->lap_amount = temp;
 
-            std::cout << "\nDer Runner faehrt nun " << robot->lap_amount << " Runden." << std::endl;
+			std::cout << "\nDer Runner faehrt nun " << robot->lap_amount << " Runden." << std::endl;
 
-            std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
-            std::string dummy;
-            while (dummy != "ok")
-            {
-                std::cin >> dummy;
-            }
+			std::cout << "Tippe 'ok' um ins Hauptmenue zu gelangen." << std::endl;
+			std::string dummy;
+			while (dummy != "ok")
+			{
+				std::cin >> dummy;
+			}
 
-            break;
-        }
+			break;
+		}
 
-        case 4: // end menu
-        {
-            settings_done = true;
-            break;
-        }
+		case 4: // end menu
+		{
+			settings_done = true;
+			break;
+		}
 
-        default:
-        {
-            std::cout << "Ungueltige Eingabe" << std::endl;
-            break;
-        }
-        }
-    }
+		default:
+		{
+			std::cout << "Ungueltige Eingabe" << std::endl;
+			break;
+		}
+		}
+	}
 }
 
 
@@ -524,7 +521,9 @@ void settingsMenu(SnailRunner* robot)
 
 
 /**********************************************************************************/
+//
 //								KEEPING TRACK OF TIME
+//
 /**********************************************************************************/
 
 
@@ -568,37 +567,31 @@ std::string getTimeStamp()
 	minutes = local_time->tm_min;
 	seconds = local_time->tm_sec;
 
-	
+
 	if (hours > 9)
 	{
-		//std::cout << hours << ":";
 		output += to_string(hours) + ":";
 	}
 	else
 	{
-		//std::cout << "0" << hours << ":";
 		output += "0" + to_string(hours) + ":";
 	}
 
 	if (minutes > 9)
 	{
-		//std::cout << minutes << ":";
 		output += to_string(minutes) + ":";
 	}
 	else
 	{
-		//std::cout << "0" << minutes << ":";
 		output += "0" + to_string(minutes) + ":";
 	}
-	
+
 	if (seconds > 9)
 	{
-		//std::cout << seconds;
 		output += to_string(seconds);
 	}
 	else
 	{
-		//std::cout << "0" << seconds;
 		output += "0" + to_string(seconds);
 	}
 
@@ -608,7 +601,9 @@ std::string getTimeStamp()
 
 
 /**********************************************************************************/
+//
 //								KEEPING TRACK OF TRACK
+//
 /**********************************************************************************/
 
 // Methods to keep track of the track
@@ -632,7 +627,9 @@ void addtoDistance(SnailRunner* robot)
 
 
 /**********************************************************************************/
+//
 //								LOG FUNCTIONS
+//
 /**********************************************************************************/
 
 // LOG STARTING CONDITIONS
@@ -646,30 +643,30 @@ Startzeit:        11:54:23
 */
 void logStartConditions(SnailRunner* robot, std::ofstream &file)
 {
-    file << "*********************************" << std::endl;
-    file << "Position: 	  ";
-    if (robot->start_position == 1)
-    {
+	file << "*********************************" << std::endl;
+	file << "Position: 	  ";
+	if (robot->start_position == 1)
+	{
 		file << "Startlaeufer" << std::endl;
-    }
+	}
 	else //(robot->start_position == -1)
-    {
+	{
 		file << "Weiterlaeufer" << std::endl;
-    }
+	}
 
-    file << "Fahrtrichtung:    ";
-    if (robot->direction == 1)
-    {
-        file << "Uhrzeigersinn" << std::endl; // maybe left
-    }
-    else
-    {
-        file << "gegen den Uhrzeigersinn" << std::endl; // maybe right
-    }
+	file << "Fahrtrichtung:    ";
+	if (robot->direction == 1)
+	{
+		file << "Uhrzeigersinn" << std::endl; // maybe left
+	}
+	else
+	{
+		file << "gegen den Uhrzeigersinn" << std::endl; // maybe right
+	}
 
 	file << "Rundenanzahl:     " << robot->lap_amount << std::endl;
 	file << "Startzeit:        " << getTimeStamp();
-    file << "\n*********************************" << std::endl << std::endl << std::endl;
+	file << "\n*********************************" << std::endl << std::endl << std::endl;
 }
 
 // LOG LAP BANNER
@@ -680,9 +677,9 @@ void logStartConditions(SnailRunner* robot, std::ofstream &file)
 */
 void logLapBanner(SnailRunner* robot, std::ofstream &file)
 {
-    file << "---------------------------------" << std::endl;
-    file << "             Runde "				<< robot->current_lap << std::endl;
-    file << "---------------------------------" << std::endl;
+	file << "---------------------------------" << std::endl;
+	file << "             Runde " << robot->current_lap << std::endl;
+	file << "---------------------------------" << std::endl;
 }
 
 // LOG OFF_TRAIL
@@ -723,11 +720,11 @@ Strecke:          256cm
 */
 void logLapConclusion(SnailRunner* robot, std::ofstream &file)
 {
-    file << std::endl << robot->current_lap  << ". Runde abgeschlossen:" << std::endl;
-    file << "Zeit:             " << getElapsedTime(robot) << "s" <<std::endl;
-    file << "Abweichungen:     " << robot->offtrail_count << std::endl;
+	file << std::endl << robot->current_lap << ". Runde abgeschlossen:" << std::endl;
+	file << "Zeit:             " << getElapsedTime(robot) << "s" << std::endl;
+	file << "Abweichungen:     " << robot->offtrail_count << std::endl;
 	file << "Hindernisse:      " << robot->obstacle_count << std::endl;
-	file << "Strecke:          " << ((robot->lapdistance / 60.0) / 2.0)*M_PI*0.05/*((1.0 / 75.0)* robot->lapdistance*M_PI*0.05 / 360.0) / 100.0 */<< "m" << std::endl << std::endl << std::endl;
+	file << "Strecke:          " << ((robot->lapdistance / 60.0) / 2.0)*M_PI*0.05 << "m" << std::endl << std::endl << std::endl;
 
 	std::cout << std::endl << std::endl;
 }

@@ -31,10 +31,7 @@ const std::map<WeiterLauferMachine::Event, std::string> WeiterLauferMachine::Eve
 	{ Event::OFF_TRAIL, "OFF_TRAIL" },
 	{ Event::ON_TRAIL, "ON_TRAIL" },
 	{ Event::IS_STOPPED, "IS_STOPPED" },
-
 	{ Event::ON_GREY, "ON_GREY" },
-
-
 	{ Event::RUNDE_CNT, "RUNDE_CNT" },
 	{Event::NOT_RUNDE_CNT, "NOT_RUNDE_CNT"},
 	{Event::LICHT_HINTEN, "LICHT_HINTEN"},
@@ -50,6 +47,7 @@ void WeiterLauferMachine::state(State s) {
 	/* --Log state chance. Check if description is available. */
 	bool isOldStateAvailable = (StateDescription.find(mystate) != StateDescription.end());
 	bool isNewStateAvailable = (StateDescription.find(s) != StateDescription.end());
+
 	/* --If program stops here, you have to add a state description to the map at top of this file !!! */
 	if (!isOldStateAvailable && !isNewStateAvailable)
 		OutputDebugString((LPCTSTR)"*** CHECK YOUR CODE! STATE DESCRIPTION IS MISSING ***");
