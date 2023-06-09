@@ -486,22 +486,50 @@ cout << "        (____/                                " << endl;
 }
 
 // --Main Program.
+//
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT WINDOW_WIDTH/2
+
+#define LINE_WIDTH WINDOW_WIDTH*0.02
+
+
 int main()
 {
 	// --Start the menue
-	//menue();
+	menue();
 
-	sf::RenderWindow window(sf::VideoMode(800, 800), "Test");
+	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SnailRunner LiveMap");
 
-	sf::Event e;
+	//Draw White Area
+	sf::RectangleShape whitearea(sf::Vector2f(WINDOW_WIDTH*0.8, WINDOW_HEIGHT*0.6));
+	whitearea.setFillColor(sf::Color(255, 255, 255)); //white
+	whitearea.setPosition((WINDOW_WIDTH*0.1), (WINDOW_HEIGHT*0.2));
+
+	//Draw Black Area - dependent on white area
+	sf::RectangleShape blackarea(sf::Vector2f(whitearea.getSize().x - LINE_WIDTH*2, whitearea.getSize().y - LINE_WIDTH*2));
+	blackarea.setFillColor(sf::Color(0, 0, 0)); //black
+	blackarea.setPosition(whitearea.getPosition().x + LINE_WIDTH, whitearea.getPosition().y + LINE_WIDTH);
+
+	//Draw Gray Area - depentend on white area
+	sf::RectangleShape grayarea(sf::Vector2f(whitearea.getSize().x/4, LINE_WIDTH));
+	grayarea.setFillColor(sf::Color(150, 150, 150));
+	grayarea.setPosition((WINDOW_WIDTH/2) - (whitearea.getSize().x/4)/2, whitearea.getPosition().y + whitearea.getSize().y - LINE_WIDTH);
 
 	while (window.isOpen())
 	{
-		while (window.pollEvent(e))
+		sf::Event event;
+		while (window.pollEvent(event))
 		{
-			if (e.type == sf::Event::Closed)
+			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+
+		window.clear();
+		window.draw(whitearea);
+		window.draw(blackarea);
+		window.draw(grayarea);
+		window.display();
 	}
+
 	return 0;
 }

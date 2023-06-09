@@ -1,15 +1,11 @@
-﻿  ExploreStateMachine.cpp
-  ForwardStateMachine.cpp
-  functions.cpp
-  main.cpp
+﻿  main.cpp
 z:\software_engineering\snail\snailrunner\main.cpp(1): warning C4005: "_CRT_SECURE_NO_WARNINGS": Makro-Neudefinition
   z:\software_engineering\snail\snailrunner\main.cpp: note: Siehe vorherige Definition von "_CRT_SECURE_NO_WARNINGS"
-  ObstacleStateMachine.cpp
-  SearchStateMachine.cpp
-  SnailRunner.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.cpp(250): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
-  StartLauferMachine.cpp
-  StartStateMachine.cpp
-  WeiterLauferMachine.cpp
-  Code wird generiert...
+z:\software_engineering\snail\snailrunner\main.cpp(509): warning C4244: "Argument": Konvertierung von "double" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+z:\software_engineering\snail\snailrunner\main.cpp(511): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+z:\software_engineering\snail\snailrunner\main.cpp(516): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
   Snailrunner.vcxproj -> Z:\Software_Engineering\Snail\Debug\Snailrunner.exe
