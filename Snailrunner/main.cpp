@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <fstream>
 #include <string>
+#include <SFML/Graphics.hpp>
 
 
 using namespace std;
@@ -485,8 +486,22 @@ cout << "        (____/                                " << endl;
 }
 
 // --Main Program.
-int main() {
+int main()
+{
 	// --Start the menue
-	menue();
+	//menue();
+
+	sf::RenderWindow window(sf::VideoMode(800, 800), "Test");
+
+	sf::Event e;
+
+	while (window.isOpen())
+	{
+		while (window.pollEvent(e))
+		{
+			if (e.type == sf::Event::Closed)
+				window.close();
+		}
+	}
 	return 0;
 }
