@@ -174,7 +174,7 @@ private:
 	double runner_umfang = runner_durchmesser * M_PI;
 	double streckeRunnerimGrad = runner_umfang / 360;
 	double radUmdrehungproGrad = streckeRunnerimGrad / rad_umfang;
-	double grad_in_impulse = 75;
+	double grad_in_impulse = 60; // vorher 75
 	
 	/*! Geschwindigkeit der Roboters. */
 	int speed;

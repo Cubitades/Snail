@@ -24,7 +24,7 @@ const std::map<StartLauferMachine::State, std::string> StartLauferMachine::State
 	{ State::READY, "READY"},
 	{ State::OBSTACLE_DETECTED, "OBSTACLE_DETECTED" },
 	{ State::EVASION_1, "EVASION_1" },
-	{ State::EVASION_2, "EVASION_2" },
+//	{ State::EVASION_2, "EVASION_2" },
 	{ State::EVASION_3, "EVASION_3" },
 	{ State::EVASION_4, "EVASION_4" },
 	{ State::EVASION_5, "EVASION_5" },
@@ -644,11 +644,11 @@ void StartLauferMachine::transition(Event ev) {
 	case State::EVASION_1:
 		switch (ev)
 		{
-		case StartLauferMachine::Event::IS_STOPPED:
+		case StartLauferMachine::Event::IS_STOPPED: onLeavingEvasion1(); onEnteringEvasion3();
 			break;
 		case StartLauferMachine::Event::WALL_AHEAD:
 			break;
-		case StartLauferMachine::Event::NOT_WALL_AHEAD: onLeavingEvasion1(); onEnteringEvasion2();
+		case StartLauferMachine::Event::NOT_WALL_AHEAD: //onLeavingEvasion1(); onEnteringEvasion2();
 			break;
 		case StartLauferMachine::Event::ON_TRAIL:
 			break;
@@ -671,7 +671,7 @@ void StartLauferMachine::transition(Event ev) {
 		}
 		break;
 
-	case State::EVASION_2:
+	/*case State::EVASION_2:
 		switch (ev)
 		{
 		case StartLauferMachine::Event::IS_STOPPED: onLeavingEvasion2(); onEnteringEvasion3();
@@ -700,7 +700,7 @@ void StartLauferMachine::transition(Event ev) {
 
 		}
 		break;
-
+	*/
 	case State::EVASION_3:
 		switch (ev)
 		{
@@ -975,7 +975,7 @@ void StartLauferMachine::transition(Event ev) {
 	case State::ALLIGN_2:
 		switch (ev)
 		{
-		case StartLauferMachine::Event::IS_STOPPED:
+		case StartLauferMachine::Event::IS_STOPPED://onLeavingAllign2(); onEnteringOnTrail();
 			break;
 		case StartLauferMachine::Event::WALL_AHEAD:
 			break;
@@ -985,7 +985,7 @@ void StartLauferMachine::transition(Event ev) {
 			break;
 		case StartLauferMachine::Event::NO_SIDEWALL:
 			break;
-		case StartLauferMachine::Event::OFF_TRAIL:
+		case StartLauferMachine::Event::OFF_TRAIL: onLeavingAllign2(); onEnteringOffTrail();
 			break;
 		case StartLauferMachine::Event::ON_GREY:
 			break;
@@ -1092,11 +1092,11 @@ void StartLauferMachine::onEnteringAusrichten_2() { // turn(-180)
 	state(State::AUSRICHTEN_2);
 	if (robot->start_position == true) // STARTLAUFER
 	{
-		robot->turn(70); // -180 rechts drehen
+		robot->turn(90); // -180 rechts drehen // vorher turn(70) bei grad in impulse = 75
 	}
 	else
 	{
-		robot->turn(70);
+		robot->turn(90);
 	}
 
 
@@ -1318,7 +1318,7 @@ void StartLauferMachine::onEnteringObstacleDetected() {
 
 void StartLauferMachine::onEnteringEvasion1() {
 	state(State::EVASION_1);
-	if (robot->direction == 1)
+	if (robot->direction == 1) // Uhrzeigersinn
 	{
 		robot->turn(90);
 	}
@@ -1330,9 +1330,9 @@ void StartLauferMachine::onEnteringEvasion1() {
 	cout << "EVASION_1" << endl;
 }
 
-void StartLauferMachine::onEnteringEvasion2() {
+/*void StartLauferMachine::onEnteringEvasion2() {
 	state(State::EVASION_2);
-	if (robot->direction == 1)
+	if (robot->direction == 1) // Uhrzeigersinn
 	{
 		robot->turn(40); // muss noch mal anpassen!!!
 	}
@@ -1343,7 +1343,7 @@ void StartLauferMachine::onEnteringEvasion2() {
 	
 	cout << "EVASION_2" << endl;
 
-}
+}*/
 
 void StartLauferMachine::onEnteringEvasion3() {
 	state(State::EVASION_3);
@@ -1364,11 +1364,11 @@ void StartLauferMachine::onEnteringEvasion4() {
 	state(State::EVASION_4);
 	if (robot->direction == 1)
 	{
-		robot->turn(-70);
+		robot->turn(-90);
 	}
 	else
 	{
-		robot->turn(-70);
+		robot->turn(-90);
 	}
 	
 	cout << "EVASION_4" << endl;
@@ -1409,11 +1409,11 @@ void StartLauferMachine::onEnteringBack1() {
 	state(State::BACK_1);
 	if (robot->direction == 1)
 	{
-		robot->turn(-70);
+		robot->turn(-90); // vor her 70 bei impulse 75
 	}
 	else
 	{
-		robot->turn(70);
+		robot->turn(90);
 	}
 	
 	cout << "BACK_1" << endl;
@@ -1453,11 +1453,11 @@ void StartLauferMachine::onEnteringAllign2() {
 	state(State::ALLIGN_2);
 	if (robot->direction == 1)
 	{
-		robot->turn(180);
+		robot->turn(90); 
 	}
 	else
 	{
-		robot->turn(180);
+		robot->turn(90);
 	}
 	
 	cout << "ALLIGN_2" << endl;

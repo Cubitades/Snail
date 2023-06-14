@@ -317,6 +317,11 @@ cout << "        (____/                                " << endl;
 			cin >> dummy;
 
 			break;
+		case 't':
+			StartSupervision(runner, NON_REACTIVE);
+			runner->turn(-90);
+			StopSupervision();
+			break;
 		};
 
 

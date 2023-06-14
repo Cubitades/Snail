@@ -1,4 +1,2 @@
-﻿  main.cpp
-z:\software_engineering\snail\snailrunner\main.cpp(1): warning C4005: "_CRT_SECURE_NO_WARNINGS": Makro-Neudefinition
-  z:\software_engineering\snail\snailrunner\main.cpp: note: Siehe vorherige Definition von "_CRT_SECURE_NO_WARNINGS"
-  Snailrunner.vcxproj -> Z:\Software_Engineering\Snail\Debug\Snailrunner.exe
+﻿  StartLauferMachine.cpp
+  Snailrunner.vcxproj -> Z:\Software_Engineering\SnailRunner v2.0\Snail\Debug\Snailrunner.exe
