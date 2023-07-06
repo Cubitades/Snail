@@ -149,6 +149,18 @@ public:
 
 	double lapdistance = 0;
 
+/******************************************************************************/
+//
+//									SFML
+//
+/******************************************************************************/
+
+	const int WINDOW_WIDTH = 1000;
+	const int WINDOW_HEIGHT = WINDOW_WIDTH/2 ;
+	const int LINE_WIDTH = 20;
+
+	float orientation = 0; // Richtung des Snails in Grad
+
 private:
 	/*! Die Aktoren (Motoren und Lampen) des Roboters. */
 	IntelligentMotor leftmotor;
