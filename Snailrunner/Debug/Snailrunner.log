@@ -1,64 +1,25 @@
 ﻿  ExploreStateMachine.cpp
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
   ForwardStateMachine.cpp
-  functions.cpp
-  main.cpp
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\main.cpp(1): warning C4005: "_CRT_SECURE_NO_WARNINGS": Makro-Neudefinition
-  z:\software_engineering\snailrunner v2.0\snail\snailrunner\main.cpp: note: Siehe vorherige Definition von "_CRT_SECURE_NO_WARNINGS"
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
   ObstacleStateMachine.cpp
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
   SearchStateMachine.cpp
-  SFMLmap.cpp
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlmap.cpp(5): warning C4244: "Argument": Konvertierung von "double" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlmap.cpp(7): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlmap.cpp(15): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-  SFMLrunner.cpp
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(6): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(8): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(12): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(14): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(18): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(20): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(24): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(26): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(30): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(32): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(36): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
-          with
-          [
-              T=float
-          ]
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\sfmlrunner.cpp(38): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
   SnailRunner.cpp
-z:\software_engineering\snailrunner v2.0\snail\snailrunner\snailrunner.cpp(250): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
+z:\software_engineering\snail\snailrunner\snailrunner.cpp(250): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
   StartLauferMachine.cpp
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
   StartStateMachine.cpp
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
   WeiterLauferMachine.cpp
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
+  functions.cpp
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
+  main.cpp
+z:\software_engineering\snail\snailrunner\main.cpp(1): warning C4005: "_CRT_SECURE_NO_WARNINGS": Makro-Neudefinition
+  z:\software_engineering\snail\snailrunner\main.cpp: note: Siehe vorherige Definition von "_CRT_SECURE_NO_WARNINGS"
+z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
   Code wird generiert...
-  Snailrunner.vcxproj -> Z:\Software_Engineering\SnailRunner v2.0\Snail\Debug\Snailrunner.exe
+  Snailrunner.vcxproj -> Z:\Software_Engineering\Snail\Debug\Snailrunner.exe

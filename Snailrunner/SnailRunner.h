@@ -161,6 +161,8 @@ public:
 
 	float orientation = 0; // Richtung des Snails in Grad
 
+	float winkel_gedreht() { return (((left().encoder().value() / radUmdrehungproGrad) / uebersetzungsverhaeltnis_getriebe) / grad_in_impulse); } // liefert der gedrehte Winkel zurück
+
 private:
 	/*! Die Aktoren (Motoren und Lampen) des Roboters. */
 	IntelligentMotor leftmotor;

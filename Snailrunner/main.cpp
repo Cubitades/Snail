@@ -292,6 +292,10 @@ cout << "        (____/                                " << endl;
 		input = tolower(input);
 		char dummy[256];
 
+		
+		SFMLmap livemap(runner->WINDOW_HEIGHT, runner->WINDOW_WIDTH, runner->LINE_WIDTH);
+		SFMLrunner snail(500, 250);
+
 		// Check user 's wish
 		switch (input)
 		{
@@ -308,18 +312,43 @@ cout << "        (____/                                " << endl;
 			break;
 
 		case 's':
-			runner->activate(SnailRunner::START_LAUFER_MISSION);
-			StartSupervision(runner);
+		{
+			sf::RenderWindow window(sf::VideoMode(runner->WINDOW_WIDTH, runner->WINDOW_HEIGHT), "SnailRunner LiveMap");
+			while (window.isOpen())
+			{
+				sf::Event event;
+				while (window.pollEvent(event))
+				{
+					if (event.type == sf::Event::Closed)
+						window.close();
+				}
 
-			cout << "Start Laufer Machine is running!!" << endl
-				<< "Enter 'OK' to stop: " << flush;
-			cin >> dummy;
-			StopSupervision();
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				{
+					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+					snail.setPosition((float)mousePos.x, (float)mousePos.y);
+				}
+
+				runner->activate(SnailRunner::START_LAUFER_MISSION);
+				StartSupervision(runner);
+
+				cout << "Start Laufer Machine is running!!" << endl
+					<< "Enter 'OK' to stop: " << flush;
+				cin >> dummy;
+				StopSupervision();
+
+				snail.setRotation(runner->orientation);
+				//snail.setPosition(500, 250);
+
+				window.clear();
+				window.draw(livemap);
+				window.draw(snail);
+				window.display();
+			}
+		}
 			break;
 		case 'q': 
 			done = true;
-			cin >> dummy;
-
 			break;
 		};
 
@@ -494,10 +523,10 @@ cout << "        (____/                                " << endl;
 int main()
 {
 	// --Start the menue
-	//menue();
+	menue();
+	/*
 	SnailRunner* runner = new SnailRunner;
 	sf::RenderWindow window(sf::VideoMode(runner->WINDOW_WIDTH, runner-> WINDOW_HEIGHT), "SnailRunner LiveMap");
-
 	SFMLmap livemap(runner->WINDOW_HEIGHT, runner->WINDOW_WIDTH, runner->LINE_WIDTH);
 	SFMLrunner snail(500, 250);
 
@@ -517,12 +546,13 @@ int main()
 		}
 
 		snail.setRotation(runner->orientation);
+		//snail.setPosition(500, 250);
 
 		window.clear();
 		window.draw(livemap);
 		window.draw(snail);
 		window.display();
 	}
-
+	*/
 	return 0;
 }

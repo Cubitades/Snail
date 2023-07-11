@@ -340,6 +340,7 @@ void SnailRunner::onInputChanged(Bitfield bfield) {
 	}
 
 	if (bfield&(1 << INPUT_ULTRASONIC)) {
+
 		if (mission == OBSTACLE_MISSION)
 		{
 			// --Überprüfe, ob Schwellwert überschritten.
