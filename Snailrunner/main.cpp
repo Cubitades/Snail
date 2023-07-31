@@ -4,11 +4,6 @@
 #include <cstdio>
 #include <fstream>
 #include <string>
-#include <SFML/Graphics.hpp>
-
-
-using namespace std;
-
 #include "Fisherman.h"
 #include "WaitUntil.h"
 #include "supervision.h"
@@ -17,8 +12,7 @@ using namespace std;
 #include "LoggingServer.h"
 #include "functions.h"
 
-#include "SFMLmap.h"
-#include "SFMLrunner.h"
+using namespace std;
 
 /* --Input Menue. */
 void imenue(double& val, RunUnit& unit) {
@@ -292,10 +286,6 @@ cout << "        (____/                                " << endl;
 		input = tolower(input);
 		char dummy[256];
 
-		
-		SFMLmap livemap(runner->WINDOW_HEIGHT, runner->WINDOW_WIDTH, runner->LINE_WIDTH);
-		SFMLrunner snail(500, 250);
-
 		// Check user 's wish
 		switch (input)
 		{
@@ -313,22 +303,6 @@ cout << "        (____/                                " << endl;
 
 		case 's':
 		{
-			sf::RenderWindow window(sf::VideoMode(runner->WINDOW_WIDTH, runner->WINDOW_HEIGHT), "SnailRunner LiveMap");
-			while (window.isOpen())
-			{
-				sf::Event event;
-				while (window.pollEvent(event))
-				{
-					if (event.type == sf::Event::Closed)
-						window.close();
-				}
-
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				{
-					sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-					snail.setPosition((float)mousePos.x, (float)mousePos.y);
-				}
-
 				runner->activate(SnailRunner::START_LAUFER_MISSION);
 				StartSupervision(runner);
 
@@ -336,15 +310,6 @@ cout << "        (____/                                " << endl;
 					<< "Enter 'OK' to stop: " << flush;
 				cin >> dummy;
 				StopSupervision();
-
-				snail.setRotation(runner->orientation);
-				//snail.setPosition(500, 250);
-
-				window.clear();
-				window.draw(livemap);
-				window.draw(snail);
-				window.display();
-			}
 		}
 			break;
 		case 'q': 

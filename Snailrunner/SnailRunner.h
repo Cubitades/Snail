@@ -112,7 +112,7 @@ public:
 
 	//vector<int> greyvalues;
 	queue<int> graydient;
-	int last_Gradient;
+	double last_Gradient;
 
 
 	/******************************************************************************/
@@ -159,9 +159,9 @@ public:
 	const int WINDOW_HEIGHT = WINDOW_WIDTH/2 ;
 	const int LINE_WIDTH = 20;
 
-	float orientation = 0; // Richtung des Snails in Grad
+	double orientation = 0; // Richtung des Snails in Grad
 
-	float winkel_gedreht() { return (((left().encoder().value() / radUmdrehungproGrad) / uebersetzungsverhaeltnis_getriebe) / grad_in_impulse); } // liefert der gedrehte Winkel zurück
+	double winkel_gedreht() { return (((left().encoder().value() / radUmdrehungproGrad) / uebersetzungsverhaeltnis_getriebe) / grad_in_impulse); } // liefert der gedrehte Winkel zurück
 
 private:
 	/*! Die Aktoren (Motoren und Lampen) des Roboters. */

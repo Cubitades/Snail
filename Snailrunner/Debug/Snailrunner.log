@@ -1,25 +1,4 @@
-﻿  ExploreStateMachine.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  ForwardStateMachine.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  ObstacleStateMachine.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  SearchStateMachine.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  SnailRunner.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-z:\software_engineering\snail\snailrunner\snailrunner.cpp(250): warning C4244: "=": Konvertierung von "double" in "int", möglicher Datenverlust
-  StartLauferMachine.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  StartStateMachine.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  WeiterLauferMachine.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  functions.cpp
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  main.cpp
+﻿  main.cpp
 z:\software_engineering\snail\snailrunner\main.cpp(1): warning C4005: "_CRT_SECURE_NO_WARNINGS": Makro-Neudefinition
   z:\software_engineering\snail\snailrunner\main.cpp: note: Siehe vorherige Definition von "_CRT_SECURE_NO_WARNINGS"
-z:\software_engineering\snail\snailrunner\snailrunner.h(164): warning C4244: "return": Konvertierung von "double" in "float", möglicher Datenverlust
-  Code wird generiert...
   Snailrunner.vcxproj -> Z:\Software_Engineering\Snail\Debug\Snailrunner.exe

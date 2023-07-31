@@ -242,7 +242,7 @@ void SnailRunner::onInputChanged(Bitfield bfield) {
 	if (bfield&(1 << INPUT_COLOUR_DOWN)) {
 
 		int col = colourdown().value();
-		int secant = 2000;
+		double secant = 2000;
 		graydient.push(col);
 
 		if (graydient.size() >= 4)
