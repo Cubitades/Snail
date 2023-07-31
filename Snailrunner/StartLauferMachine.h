@@ -1,6 +1,6 @@
 #ifndef STARTLAUFERMACHINE_H
 #define STARTLAUFERMACHINE_H
-
+#define NOMINMAX
 #include <map>
 #include <string>
 

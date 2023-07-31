@@ -143,7 +143,6 @@
     <ClCompile Include="SnailRunner.cpp" />
     <ClCompile Include="StartLauferMachine.cpp" />
     <ClCompile Include="StartStateMachine.cpp" />
-    <ClCompile Include="WeiterLauferMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Actor.h" />
@@ -204,7 +203,6 @@
     <ClInclude Include="SnailRunner.h" />
     <ClInclude Include="StartLauferMachine.h" />
     <ClInclude Include="StartStateMachine.h" />
-    <ClInclude Include="WeiterLauferMachine.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Lib\Fisherman.lib" />

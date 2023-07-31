@@ -1,4 +1,6 @@
 #include "SnailRunner.h"
+#include "SFMLmap.h"
+#include "SFMLrunner.h"
 
 /*! Anschlüsse des Roboters an den TX Controller.
  *  Eingänge:
@@ -55,7 +57,7 @@ distance(INFO_DISTANCE),
 distance_side(INFO_DISTANCE_SIDE),
 accuLevel(ANALOG_10KV, I1, INFO_ACCU_LEVEL),
 pushButton(INFO_BUTTON),
-ex_state(0), ob_state(0), se_state(0), fw_state(0), st_state(0), sl_state(0), wl_state(0), mission(EXPLORE_MISSION) {}
+ex_state(0), ob_state(0), se_state(0), fw_state(0), st_state(0), sl_state(0), mission(EXPLORE_MISSION), window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML LiveMap") {}
 
 
 SnailRunner::~SnailRunner(void) {
@@ -65,7 +67,6 @@ SnailRunner::~SnailRunner(void) {
 	delete fw_state;
 	delete st_state;
 	delete sl_state;
-	delete wl_state;
 }
 
 bool SnailRunner::construct(TxControllerSupervision* controller) {
@@ -115,7 +116,6 @@ bool SnailRunner::construct(TxControllerSupervision* controller) {
 	se_state = new SearchStateMachine(this);
 	st_state = new StartStateMachine(this);
 	sl_state = new StartLauferMachine(this);
-	wl_state = new WeiterLauferMachine(this);
 
 	/* --Interne Attribute setzen. */
 	speed = 350;
@@ -198,12 +198,6 @@ void SnailRunner::onMotorStopped(Bitfield bfield) {
 		{
 			cout << "EVENT: IS_STOPPED" << endl;
 			sl_state->handle(StartLauferMachine::Event::IS_STOPPED);		
-		}
-		else if (mission == WEITER_LAUFER_MISSION)
-		{
-			cout << "EVENT: IS_STOPPED" << endl;
-			wl_state->handle(WeiterLauferMachine::Event::IS_STOPPED);
-
 		}
 			
 }
@@ -388,27 +382,6 @@ void SnailRunner::onInputChanged(Bitfield bfield) {
 			}
 			last_dis = dis;
 		}
-
-		else if (mission == WEITER_LAUFER_MISSION) {
-
-			int dis = ahead().value();
-			{
-				dis = ahead().value();
-
-				if (dis >= THRESHOLD_DISTANCE && last_dis < THRESHOLD_DISTANCE) {
-					cout << "EVENT: NOT_WALL_AHEAD" << endl;
-					wl_state->handle(WeiterLauferMachine::Event::NOT_WALL_AHEAD);
-
-				}
-				else if (dis < THRESHOLD_DISTANCE && last_dis >= THRESHOLD_DISTANCE) {
-					cout << "WALL_AHEAD" << endl;
-					wl_state->handle(WeiterLauferMachine::Event::WALL_AHEAD);
-
-				}
-
-			}
-			last_dis = dis;
-		}
 	}
 	if (bfield&(1 << INPUT_ULTRASONIC_SIDE)) {
 		if (mission == OBSTACLE_MISSION) {
@@ -458,8 +431,6 @@ void SnailRunner::onStart() {
 		st_state->start();
 	else if (mission == START_LAUFER_MISSION)
 		sl_state->start();
-	else if (mission == WEITER_LAUFER_MISSION)
-		wl_state->start();
 }
 
 /*! Diese Methode wird beim Beenden des reaktiven Modus des Roboters ausgeführt.

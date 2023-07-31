@@ -1,6 +1,6 @@
 #ifndef _runnerROBOT_H
 #define _runnerROBOT_H
-
+#define NOMINMAX
 #define _USE_MATH_DEFINES
 
 #include "ReactiveModel.h"
@@ -15,6 +15,9 @@
 #include <vector>
 #include <ctime>
 
+#include <SFML/Graphics.hpp>
+
+
 /* --Include State Machines. */
 #include "ExploreStateMachine.h"
 #include "ObstacleStateMachine.h"
@@ -22,7 +25,6 @@
 #include "SearchStateMachine.h"
 #include "StartStateMachine.h"
 #include "StartLauferMachine.h"
-#include "WeiterLauferMachine.h"
 
 #include "WaitUntil.h"
 
@@ -155,6 +157,8 @@ public:
 //
 /******************************************************************************/
 
+	sf::RenderWindow window;
+
 	const int WINDOW_WIDTH = 1000;
 	const int WINDOW_HEIGHT = WINDOW_WIDTH/2 ;
 	const int LINE_WIDTH = 20;
@@ -210,7 +214,6 @@ private:
 	SearchStateMachine* se_state;
 	StartStateMachine* st_state;
 	StartLauferMachine* sl_state;
-	WeiterLauferMachine* wl_state;
 
 	/*! Aktuelle Mission. */
 	Mission mission;

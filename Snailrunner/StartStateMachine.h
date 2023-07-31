@@ -1,6 +1,6 @@
 #ifndef STARTSTATEMACHINE_H
 #define STARTSTATEMACHINE_H
-
+#define NOMINMAX
 #include <map>
 #include <string>
 
