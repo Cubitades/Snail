@@ -1,6 +1,5 @@
 #include "SnailRunner.h"
-#include "SFMLmap.h"
-#include "SFMLrunner.h"
+
 
 /*! Anschlüsse des Roboters an den TX Controller.
  *  Eingänge:
@@ -57,7 +56,7 @@ distance(INFO_DISTANCE),
 distance_side(INFO_DISTANCE_SIDE),
 accuLevel(ANALOG_10KV, I1, INFO_ACCU_LEVEL),
 pushButton(INFO_BUTTON),
-ex_state(0), ob_state(0), se_state(0), fw_state(0), st_state(0), sl_state(0), mission(EXPLORE_MISSION), window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "SFML LiveMap") {}
+ex_state(0), ob_state(0), se_state(0), fw_state(0), st_state(0), sl_state(0), mission(EXPLORE_MISSION), runner(500, 250), map(WINDOW_WIDTH, WINDOW_HEIGHT, LINE_WIDTH), window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "DUCS LIVE MAP") {}
 
 
 SnailRunner::~SnailRunner(void) {
@@ -232,7 +231,13 @@ void SnailRunner::onInputChanged(Bitfield bfield) {
 	const int THRESHOLD_COLOR_GRAU_SCHWARZ = 1600;
 	const int THRESHOLD_COLOR_BACK_MIN = 1000;
 	const int THRESHOLD_GRADIENT = 275;
-
+	/*
+	window.clear();
+	window.draw(map);
+	window.draw(runner);
+	window.display();
+	*/
+	//livemapstart();
 	if (bfield&(1 << INPUT_COLOUR_DOWN)) {
 
 		int col = colourdown().value();
@@ -457,4 +462,21 @@ bool SnailRunner::vergleich_ecke(int corner_amount) {
 
 }
 
+void SnailRunner::livemapstart()
+{
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(map);
+		window.draw(runner);
+		window.display();
+	}
+}
 

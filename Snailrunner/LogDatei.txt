@@ -1,0 +1,8 @@
+*********************************
+Position: 	  Startlaeufer
+Fahrtrichtung:    Uhrzeigersinn
+Rundenanzahl:     2
+Startzeit:        13:57:45
+*********************************
+
+

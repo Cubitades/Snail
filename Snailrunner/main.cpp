@@ -306,6 +306,7 @@ cout << "        (____/                                " << endl;
 		{
 				runner->activate(SnailRunner::START_LAUFER_MISSION);
 				StartSupervision(runner);
+				runner->livemapstart();
 
 				cout << "Start Laufer Machine is running!!" << endl
 					<< "Enter 'OK' to stop: " << flush;

@@ -16,6 +16,8 @@
 #include <ctime>
 
 #include <SFML/Graphics.hpp>
+#include "SFMLmap.h"
+#include "SFMLrunner.h"
 
 
 /* --Include State Machines. */
@@ -159,9 +161,14 @@ public:
 
 	sf::RenderWindow window;
 
+
 	const int WINDOW_WIDTH = 1000;
 	const int WINDOW_HEIGHT = WINDOW_WIDTH/2 ;
 	const int LINE_WIDTH = 20;
+	SFMLrunner runner;
+	SFMLmap map;
+
+	void livemapstart();
 
 	double orientation = 0; // Richtung des Snails in Grad
 
