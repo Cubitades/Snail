@@ -33,11 +33,16 @@ public:
 	void start();
 	/* --Restart the state machine. */
 	void restart();	
+	
+	int count = 0;
+
+	/* --- Diese Variable sagt, ob der Snail im ObstacleMachine ist, wenn ja dann false (1) sonst ist true (0) --- */
+	bool obstacle = true;
 
 private:
 	State mystate;
 	SnailRunner* robot;
-	int count = 0;
+	
 	
 
 

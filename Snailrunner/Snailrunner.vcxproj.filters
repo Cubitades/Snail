@@ -60,6 +60,12 @@
     <ClCompile Include="SFMLrunner.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="SFMLobstacle.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLwaypoint.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExploreStateMachine.h">
@@ -234,6 +240,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="SFMLrunner.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLobstacle.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLwaypoint.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,14 +1,78 @@
 ﻿  ExploreStateMachine.cpp
-d:\netcase\swe_et\praktikum\ss2023.neu\03.2020_vorlagesnailrunnervs2017_12.03_laeuft1\vorlagesnailrunner\snailrunner\snailrunner.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "ReactiveModel.h": No such file or directory
   ForwardStateMachine.cpp
-d:\netcase\swe_et\praktikum\ss2023.neu\03.2020_vorlagesnailrunnervs2017_12.03_laeuft1\vorlagesnailrunner\snailrunner\snailrunner.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "ReactiveModel.h": No such file or directory
-  LoggingServer.cpp
+  functions.cpp
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\functions.cpp(561): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(506): note: Siehe Deklaration von "localtime"
   main.cpp
-d:\netcase\swe_et\praktikum\ss2023.neu\03.2020_vorlagesnailrunnervs2017_12.03_laeuft1\vorlagesnailrunner\snailrunner\main.cpp(8): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "Fisherman.h": No such file or directory
   ObstacleStateMachine.cpp
-d:\netcase\swe_et\praktikum\ss2023.neu\03.2020_vorlagesnailrunnervs2017_12.03_laeuft1\vorlagesnailrunner\snailrunner\snailrunner.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "ReactiveModel.h": No such file or directory
   SearchStateMachine.cpp
-d:\netcase\swe_et\praktikum\ss2023.neu\03.2020_vorlagesnailrunnervs2017_12.03_laeuft1\vorlagesnailrunner\snailrunner\snailrunner.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "ReactiveModel.h": No such file or directory
+  SFMLmap.cpp
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlmap.cpp(5): warning C4244: "Initialisierung": Konvertierung von "double" in "int", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlmap.cpp(7): warning C4244: "Argument": Konvertierung von "double" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlmap.cpp(9): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlmap.cpp(17): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlmap.cpp(17): warning C4244: "Argument": Konvertierung von "double" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+  SFMLrunner.cpp
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(6): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(8): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(12): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(14): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(18): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(20): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(24): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(26): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(30): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(32): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(36): warning C4244: "Argument": Konvertierung von "int" in "T", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\sfmlrunner.cpp(38): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
   SnailRunner.cpp
-d:\netcase\swe_et\praktikum\ss2023.neu\03.2020_vorlagesnailrunnervs2017_12.03_laeuft1\vorlagesnailrunner\snailrunner\snailrunner.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "ReactiveModel.h": No such file or directory
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(504): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(506): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(516): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(555): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(556): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(569): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(570): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(583): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(584): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(597): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+\\fileservice-p.hs-osnabrueck.de\ducatran\desktop\snail 080823\snailrunner\snailrunner.cpp(598): warning C4244: "Argument": Konvertierung von "double" in "float", möglicher Datenverlust
+  StartLauferMachine.cpp
+  StartStateMachine.cpp
   Code wird generiert...

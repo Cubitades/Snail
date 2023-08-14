@@ -626,6 +626,8 @@ void addtoDistance(SnailRunner* robot)
 
 
 
+
+
 /**********************************************************************************/
 //
 //								LOG FUNCTIONS
@@ -728,3 +730,4 @@ void logLapConclusion(SnailRunner* robot, std::ofstream &file)
 
 	std::cout << std::endl << std::endl;
 }
+

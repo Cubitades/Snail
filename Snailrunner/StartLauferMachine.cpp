@@ -1092,11 +1092,11 @@ void StartLauferMachine::onEnteringAusrichten_2() { // turn(-180)
 	state(State::AUSRICHTEN_2);
 	if (robot->start_position == true) // STARTLAUFER
 	{
-		robot->turn(70); // -180 rechts drehen
+		robot->turn(90); // -180 rechts drehen
 	}
 	else
 	{
-		robot->turn(70);
+		robot->turn(90);
 	}
 
 
@@ -1143,12 +1143,16 @@ void StartLauferMachine::onEnteringOffTrail() {// stop
 void StartLauferMachine::onEnteringStopping() {// ecken_cnt()
 	state(State::STOPPING);
 	cout << "Stopping" << endl;
+	count = 1;
+	
 }
 
 void StartLauferMachine::onEnteringCorrectTrailRight() { // turn()
 	state(State::CORRECT_TRAIL_RIGHT);
+	robot->impulse_nach_turn = 0;
+	robot->impulse_vor_turn = 0;
 	count *= 2;
-	if (count == 16)
+	if (count == 8)
 	{
 		robot->current_corner = robot->current_corner + 1;
 		logCorner(robot, file);
@@ -1159,16 +1163,24 @@ void StartLauferMachine::onEnteringCorrectTrailRight() { // turn()
 		}
 		*/
 		cout << "Ecke Nr. : " << robot->current_corner << endl;
+		
 
 	}
-	robot->turn(count * -7.5);
+	robot->impulse_vor_turn = robot->left().encoder().value();
+	robot->turn(count * -15);
+	
+	//robot->runner.rotate(count * 15);
+	//robot -> calculateOrientation(count * 15);
 	cout << "CorrectRight" << endl;
+	cout << "Orientation ist: " << robot->orientation << endl;
 }
 
 void StartLauferMachine::onEnteringCorrectTrailLeft() { // turn()
 	state(State::CORRECT_TRAIL_LEFT);
+	robot->impulse_nach_turn = 0;
+	robot->impulse_vor_turn = 0;
 	count *= 2;
-	if (count == 16)
+	if (count == 8)
 	{
 		robot->current_corner = robot->current_corner + 1;
 		logCorner(robot, file);
@@ -1179,10 +1191,16 @@ void StartLauferMachine::onEnteringCorrectTrailLeft() { // turn()
 			cout << "Lap Nr, : " << robot->current_lap << endl;
 		}*/
 		cout << "Ecke Nr. : " << robot->current_corner << endl;
+		
 	}
 
-	robot->turn(count * 7.5);
+	robot->impulse_vor_turn = robot->left().encoder().value();
+	robot->turn(count * 15);
+	//robot->runner.rotate(count * -15);
+	//robot->calculateOrientation(count * -15);
 	cout << "CorrectLeft" << endl;
+	cout << "Orientation ist: " << robot->orientation << endl;
+
 }
 
 void StartLauferMachine::onEnteringStoppingGrey() {
@@ -1275,10 +1293,16 @@ void StartLauferMachine::onLeavingFailure() {}
 
 
 void StartLauferMachine::onLeavingCorrectTrailLeft() { // stop
+	robot->impulse_nach_turn = robot->left().encoder().value();
 	robot->stop();
+	robot->impulse_differenz = robot->impulse_nach_turn - robot->impulse_vor_turn;
+
 }
 void StartLauferMachine::onLeavingCorrectTrailRight() {// stop
+	robot->impulse_nach_turn = robot->left().encoder().value();
 	robot->stop();
+	robot->impulse_differenz = robot->impulse_nach_turn - robot->impulse_vor_turn;
+	
 }
 
 void StartLauferMachine::onLeavingStoppingGrey() {}
@@ -1310,10 +1334,13 @@ void StartLauferMachine::onLeavingVorFinal() {}
 /* --------- HINDERNIS UMFAHREN --------------*/
 
 void StartLauferMachine::onEnteringObstacleDetected() {
+	SFMLobstacle ob(robot ->runner.getPosition().x +100, robot->runner.getPosition().y);
+	robot->obstacles.push_back(ob);
 	state(State::OBSTACLE_DETECTED);
 	robot->stop();
 	logObstacle(robot, file);
 	cout << "OBSTACLE_DETECTED" << endl;
+	obstacle = false;
 }
 
 void StartLauferMachine::onEnteringEvasion1() {
@@ -1321,10 +1348,12 @@ void StartLauferMachine::onEnteringEvasion1() {
 	if (robot->direction == 1)
 	{
 		robot->turn(90);
+		
 	}
 	else
 	{
 		robot->turn(-90);
+		//robot->calculateOrientation(-90);
 	}
 	
 	cout << "EVASION_1" << endl;
@@ -1334,11 +1363,13 @@ void StartLauferMachine::onEnteringEvasion2() {
 	state(State::EVASION_2);
 	if (robot->direction == 1)
 	{
-		robot->turn(40); // muss noch mal anpassen!!!
+		robot->turn(47); // muss noch mal anpassen!!!
+		robot->current_corner_obstacle = 1; // =1
 	}
 	else
 	{
-		robot->turn(-40);
+		robot->turn(-47);
+		//robot->calculateOrientation(-40);
 	}
 	
 	cout << "EVASION_2" << endl;
@@ -1364,11 +1395,13 @@ void StartLauferMachine::onEnteringEvasion4() {
 	state(State::EVASION_4);
 	if (robot->direction == 1)
 	{
-		robot->turn(-70);
+		robot->turn(-90);
+		robot->current_corner_obstacle = 2; // =2
 	}
 	else
 	{
-		robot->turn(-70);
+		robot->turn(-90);
+		//robot->calculateOrientation(-70);
 	}
 	
 	cout << "EVASION_4" << endl;
@@ -1409,11 +1442,13 @@ void StartLauferMachine::onEnteringBack1() {
 	state(State::BACK_1);
 	if (robot->direction == 1)
 	{
-		robot->turn(-70);
+		robot->turn(-90);
+		robot->current_corner_obstacle = 3; // =3
 	}
 	else
 	{
-		robot->turn(70);
+		robot->turn(90);
+		//robot->calculateOrientation(70);
 	}
 	
 	cout << "BACK_1" << endl;
@@ -1453,11 +1488,13 @@ void StartLauferMachine::onEnteringAllign2() {
 	state(State::ALLIGN_2);
 	if (robot->direction == 1)
 	{
-		robot->turn(180);
+		robot->turn(90);
+		robot->current_corner_obstacle = 4; // =4
 	}
 	else
 	{
-		robot->turn(180);
+		robot->turn(90);
+		//robot->calculateOrientation(180);
 	}
 	
 	cout << "ALLIGN_2" << endl;
@@ -1469,10 +1506,12 @@ void StartLauferMachine::onEnteringCorrectToLeft() {
 	if (robot->direction == 1)
 	{
 		robot->turn(6);
+		//robot->calculateOrientation(6);
 	}
 	else
 	{
 		robot->turn(6);
+		//robot->calculateOrientation(6);
 	}
 	
 	cout << "CORRECT_TO_LEFT" << endl;
@@ -1483,10 +1522,12 @@ void StartLauferMachine::onEnteringCorrectToRight() {
 	if (robot->direction == 1)
 	{
 		robot->turn(-6);
+		//robot->calculateOrientation(-6);
 	}
 	else
 	{
 		robot->turn(-6);
+		//robot->calculateOrientation(-6);
 	}
 	
 	cout << "CORRECT_TO_RIGHT" << endl;
@@ -1516,7 +1557,9 @@ void StartLauferMachine::onLeavingBack2() {}
 
 void StartLauferMachine::onLeavingAllign1() {}
 
-void StartLauferMachine::onLeavingAllign2() {}
+void StartLauferMachine::onLeavingAllign2() {
+	obstacle = true;
+}
 
 void StartLauferMachine::onLeavingCorrectToLeft() {}
 

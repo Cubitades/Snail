@@ -493,10 +493,10 @@ int main()
 	menue();
 	/*
 	SnailRunner* runner = new SnailRunner;
-	sf::RenderWindow window(sf::VideoMode(runner->WINDOW_WIDTH, runner-> WINDOW_HEIGHT), "SnailRunner LiveMap");
-	SFMLmap livemap(runner->WINDOW_HEIGHT, runner->WINDOW_WIDTH, runner->LINE_WIDTH);
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "SnailRunner LiveMap");
+	SFMLmap livemap(500, 1000, runner->LINE_WIDTH);
 	SFMLrunner snail(500, 250);
-
+	
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -512,8 +512,8 @@ int main()
 			snail.setPosition((float)mousePos.x, (float)mousePos.y);
 		}
 
-		snail.setRotation(runner->orientation);
-		//snail.setPosition(500, 250);
+		snail.setRotation(270);
+		snail.setPosition(430, 390);
 
 		window.clear();
 		window.draw(livemap);

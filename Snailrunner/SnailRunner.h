@@ -9,6 +9,7 @@
 #include "Colour.h"
 #include "Distance.h"
 #include "IntelligentMotor.h"
+
 #include <stdlib.h>
 #include <math.h>
 #include <queue>
@@ -18,6 +19,8 @@
 #include <SFML/Graphics.hpp>
 #include "SFMLmap.h"
 #include "SFMLrunner.h"
+#include "SFMLobstacle.h"
+#include "SFMLwaypoint.h"
 
 
 /* --Include State Machines. */
@@ -107,8 +110,8 @@ public:
 	int grey = 870;
 
 	// threshold values Farbsensor unten
-	int threshold_grey_low = 510;
-	int threshold_grey_high = 1450;
+	int threshold_grey_low = 795;
+	int threshold_grey_high = 1800;
 	int threshold_distance= 10;
 	int threshold_distance_side_close = 5;
 	int threshold_distance_side_far = 18;
@@ -134,7 +137,7 @@ public:
 	int direction = 1;
 
 	// amount of laps
-	int lap_amount = 2;		// SollRunde
+	int lap_amount = 1;		// SollRunde
 	int corner_amount = 0;  // SollEcken
 
 	/******************************************************************************/
@@ -147,24 +150,30 @@ public:
 
 	int current_lap = 1;
 	int current_corner = 0;
+	int current_corner_obstacle = 0;
+
 	int offtrail_count = 0;
 
 	int obstacle_count = 0;
 
 	double lapdistance = 0;
+	double lapdistance_livemap = 0;
+	double lapdistance_livemap_alt = 0;
 
 /******************************************************************************/
 //
 //									SFML
 //
 /******************************************************************************/
+	double impulse_vor_turn = 0;
+	double impulse_nach_turn = 0;
+	double impulse_differenz = 0;
 
 	sf::RenderWindow window;
 
-
-	const int WINDOW_WIDTH = 1000;
-	const int WINDOW_HEIGHT = WINDOW_WIDTH/2 ;
-	const int LINE_WIDTH = 20;
+	//unsigned int WINDOW_WIDTH = 1000;
+	//unsigned int WINDOW_HEIGHT = 500;
+	int LINE_WIDTH = 20;
 	SFMLrunner runner;
 	SFMLmap map;
 
@@ -172,7 +181,25 @@ public:
 
 	double orientation = 0; // Richtung des Snails in Grad
 
-	double winkel_gedreht() { return (((left().encoder().value() / radUmdrehungproGrad) / uebersetzungsverhaeltnis_getriebe) / grad_in_impulse); } // liefert der gedrehte Winkel zurück
+	//Umrechnung Impulse in Grad
+	double impulse_in_grad(double impulse);
+	
+	// liefert den gedrehten Winkel zurück
+	double winkel_gedreht() { return (((left().encoder().value() / radUmdrehungproGrad) / uebersetzungsverhaeltnis_getriebe) / grad_in_impulse); } 
+
+	// Umrechnung Impulse von Motor zu Strecke
+	double ImpulseToDistance(double lapdistance_livemap);
+
+	// diese Funktion umwandelt Strecke zu pixel 
+	double convertToPixels(double distanceCm, int windowWidth);
+
+	// dies Funktion berechnet den gedrehten Winkel im Verhältnis zur Startposition
+	void calculateOrientation(double value);
+
+	//Vector für die Punkte
+	vector<SFMLobstacle> obstacles;
+	vector<SFMLwaypoint> waypoints;
+
 
 private:
 	/*! Die Aktoren (Motoren und Lampen) des Roboters. */
@@ -199,7 +226,7 @@ private:
 	double runner_umfang = runner_durchmesser * M_PI;
 	double streckeRunnerimGrad = runner_umfang / 360;
 	double radUmdrehungproGrad = streckeRunnerimGrad / rad_umfang;
-	double grad_in_impulse = 75;
+	double grad_in_impulse = 60;
 	
 	/*! Geschwindigkeit der Roboters. */
 	int speed;
@@ -224,6 +251,9 @@ private:
 
 	/*! Aktuelle Mission. */
 	Mission mission;
+
+	//unsigned int WINDOW_WIDTH = 1000;
+	//unsigned int WINDOW_HEIGHT = WINDOW_WIDTH/2;
 
 };
 

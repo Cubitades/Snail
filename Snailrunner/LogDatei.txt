@@ -1,8 +1,26 @@
 *********************************
 Position: 	  Startlaeufer
 Fahrtrichtung:    Uhrzeigersinn
-Rundenanzahl:     2
-Startzeit:        13:57:45
+Rundenanzahl:     1
+Startzeit:        11:42:07
 *********************************
 
 
+---------------------------------
+             Runde 1
+---------------------------------
+Abweichung	  31.409s
+1. Ecke           32.885
+Abweichung	  36.757s
+Abweichung	  40.03s
+2. Ecke           41.464
+Abweichung	  45.25s
+Hindernis         47.774s
+Abweichung	  58.829s
+Abweichung	  61.922s
+Abweichung	  64.915s
+3. Ecke           66.374
+Abweichung	  70.152s
+Abweichung	  73.132s
+4. Ecke           74.606
+Abweichung	  78.637s

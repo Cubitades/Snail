@@ -48,15 +48,18 @@
 #define INFO_DISTANCE_SIDE	"DISTANCE|SIDE"
 #define INFO_ACCU_LEVEL		"ANALOG|POWER SUPPLY, ACCU LEVEL"
 #define INFO_BUTTON			"BUTTON|PUSH BUTTON, RIGHT"
+#define WINDOW_HEIGHT 500
+#define WINDOW_WIDTH 1000
 
-SnailRunner::SnailRunner() : leftmotor(INFO_MOTOR_LEFT), rightmotor(INFO_MOTOR_RIGHT), speed(300),
+SnailRunner::SnailRunner() : leftmotor(INFO_MOTOR_LEFT), rightmotor(INFO_MOTOR_RIGHT), speed(350),
 colourSensorback(INFO_COLOUR_BACK),
 colourSensordown(INFO_COLOUR_DOWN),
 distance(INFO_DISTANCE),
 distance_side(INFO_DISTANCE_SIDE),
 accuLevel(ANALOG_10KV, I1, INFO_ACCU_LEVEL),
 pushButton(INFO_BUTTON),
-ex_state(0), ob_state(0), se_state(0), fw_state(0), st_state(0), sl_state(0), mission(EXPLORE_MISSION), runner(500, 250), map(WINDOW_WIDTH, WINDOW_HEIGHT, LINE_WIDTH), window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "DUCS LIVE MAP") {}
+ex_state(0), ob_state(0), se_state(0), fw_state(0), st_state(0), sl_state(0), mission(EXPLORE_MISSION), 
+runner(500, 250), map(WINDOW_HEIGHT, WINDOW_WIDTH), window(sf::VideoMode(WINDOW_WIDTH+200/**/, WINDOW_HEIGHT/**/), "DUCS LIVE MAP") {}
 
 
 SnailRunner::~SnailRunner(void) {
@@ -66,6 +69,7 @@ SnailRunner::~SnailRunner(void) {
 	delete fw_state;
 	delete st_state;
 	delete sl_state;
+	
 }
 
 bool SnailRunner::construct(TxControllerSupervision* controller) {
@@ -462,21 +466,261 @@ bool SnailRunner::vergleich_ecke(int corner_amount) {
 
 }
 
+/* -------------- SFML --------------------*/
+
+/* --  Stand 31.07.2023: Livemapstart mit Aktualisierung mit Zeitabstand von 500ms hat gelungen, braucht nur die Position zu aktualisieren -- */
+/* --  snail.setRotation (orientation) zeichnet wenn der Snail dreht -- */
+/* --  snail.setPosition(x,y) zeichnet Position vom Snail -- */
+/* -- Da die Map ist jede 500ms aktualisiert wird, soll die Strecke vor und nach 500ms gespeichert wird, um den Differenz zu berechnen und damit kann die Map anhand dieser Differenzstrecke aktualisieren -- */
+/* --  Idee für die Livemap: - V
+							 - wenn ecke = 0 : - vor ON_TRAIL : Strecke steigt X, y - Pixelwert nimmt X ab  
+											   - nach ON_TRAIL : Strecke steigt X, x - Pixelwert nimmt X ab  
+							 - wenn ecke = 1 : Strecke steigt X, y - Pixelwert nimmt X ab
+							 - wenn ecke = 2 : Strecke steigt X, x - Pixelwert nimmt X zu 
+							 - wenn ecke = 3 : Strecke steigt X, y - Pixelwert nimmt X zu
+							 - wenn ecke = 4 : Strecke steigt X, x - Pixelwert nimmt X ab 
+
+*/
 void SnailRunner::livemapstart()
 {
-	while (window.isOpen())
+	double strecke = 0;
+	double last_strecke = 0;
+	double streckedifferenz = 0;
+	double streckedifferenz_pixel = 0;
+	double lapdistance_livemap_differenz = 0;
+	double posX_Start = (WINDOW_WIDTH / 200.0) * 91.0;
+	double posY_Start = (WINDOW_WIDTH / 200.0) * 90.0;	
+	double posX_AUSRICHTEN3 = (WINDOW_WIDTH / 200.0) * 91.0;
+	double posY_AUSRICHTEN3 = (WINDOW_WIDTH / 200.0) * 67.0;
+	//while (window.isOpen())
+	if (mission == START_LAUFER_MISSION)
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		while (sl_state ->state() != StartLauferMachine::State::FINAL)
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+			//WaitUntilIsOver(200);
+
+			if (sl_state->state() == StartLauferMachine::State::AUSRICHTEN_3)
+			{
+				orientation = 270.0;
+				runner.setRotation(orientation);
+				//cout << "Set Rotation 270" << endl;
+				runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+				//cout << "Set Position 430 390" << endl;
+				
+			}
+			
+			else if (sl_state->state() == StartLauferMachine::State::SUCHEN || sl_state->state() == StartLauferMachine::State::START || sl_state->state() == StartLauferMachine::State::AUSRICHTEN || sl_state->state() == StartLauferMachine::State::AUSRICHTEN_2)
+			{
+				runner.setPosition(posX_Start, posY_Start);
+				runner.setRotation(0);
+				window.clear();
+				//window.draw(map);
+				window.draw(runner);
+				window.display();
+			}
+			
+			else
+			{
+				// aktualisiert den Impulswert vom Motor
+				if (sl_state->count < 2)
+				{
+					lapdistance_livemap = left().encoder().value();
+					//lapdistance_livemap_alt = lapdistance_livemap;
+					//lapdistance_livemap_differenz = lapdistance_livemap - lapdistance_livemap_alt;
+				}
+				
+
+				// Liefert der jetztigen Position (Strecke) zurück
+				strecke = ImpulseToDistance(lapdistance_livemap);
+			
+				if ((strecke - last_strecke) > 0)
+				{
+					streckedifferenz = strecke - last_strecke;
+				}
+				else
+				{
+					streckedifferenz = 0;
+				}
+				
+				streckedifferenz_pixel = convertToPixels(streckedifferenz, WINDOW_WIDTH);
+				if (sl_state->obstacle == true)
+				{
+					if (current_corner == 0)
+					{
+						posX_AUSRICHTEN3 -= streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						//runner.setRotation(270);
+						
+					}
+					else if (current_corner == 1)
+					{
+						posY_AUSRICHTEN3 -= streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(0);
+						
+					}
+					else if (current_corner == 2)
+					{
+						posX_AUSRICHTEN3 += streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(90);
+						
+					}
+					else if (current_corner == 3)
+					{
+						posY_AUSRICHTEN3 += streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(180);
+						
+					}
+					else
+					{
+						posX_AUSRICHTEN3 -= streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(270);
+						
+					}
+				}
+
+				else
+				{
+					//bewegt nach oben, Y-Wert nimmt ab
+					if (current_corner_obstacle == 1)
+					{
+						posY_AUSRICHTEN3 -= streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(0);
+
+					}
+
+					//bewegt nach rechts, X-Wert nimmt zu
+					else if (current_corner_obstacle == 2)
+					{
+						posX_AUSRICHTEN3 += streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(90);
+
+					}
+
+					//bewegt nach unten, Y-Wert nimmt zu
+					else if (current_corner_obstacle == 3)
+					{
+						posY_AUSRICHTEN3 += streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(180);
+
+					}
+
+					//bewegt nach links, X-Wert nimmt ab
+					else if (current_corner_obstacle = 4)
+					{
+						posX_AUSRICHTEN3 += streckedifferenz_pixel;
+						streckedifferenz_pixel = 0;
+						streckedifferenz = 0;
+						runner.setPosition(posX_AUSRICHTEN3, posY_AUSRICHTEN3);
+						runner.setRotation(90);
+
+					}
+
+				}
+
+				
+
+
+				sf::Event event;
+				while (window.pollEvent(event))
+				{
+					if (event.type == sf::Event::Closed)
+						window.close();
+				}
+
+				SFMLwaypoint wp(runner.getPosition().x, runner.getPosition().y);
+				waypoints.push_back(wp);
+
+				window.clear();
+				//window.draw(map);
+
+				for (unsigned int i = 0; i < obstacles.size(); i++)
+				{
+					window.draw(obstacles.at(i));
+				}
+
+				for (unsigned int i = 0; i < waypoints.size(); i++)
+				{
+					window.draw(waypoints.at(i));
+				}
+
+				window.draw(runner);
+				window.display();
+			
+				// Liefert der vorherigen Position (Strecke) (vor 500ms)
+				last_strecke = strecke;
+			
+				//cout << "LIVE MAP IST GELUNGENNNNNNNNNNN" << endl;
+				//cout << "Strecke: " << strecke << endl;
+				//cout << "Last_strecke: " <<last_strecke << endl;
+			}
+			
 		}
 
-		window.clear();
-		window.draw(map);
-		window.draw(runner);
-		window.display();
 	}
+	
 }
 
+double SnailRunner::convertToPixels(double distanceCm, int windowWidth)
+{
+	// Angenommen, das Fenster hat eine Bildhöhe (windowHeight) und Bildbreite (windowWidth) in Pixeln
+	// Berechne das Verhältnis zwischen der Fensterhöhe und der tatsächlichen Plattenbreite (in cm)
+	double pixelsPerCm = static_cast<double> (windowWidth / 200.0);
+
+	// Multipliziere das Verhältnis mit der Strecke, um die Anzahl der Pixel zu berechnen
+	double distancePixels = distanceCm * pixelsPerCm;
+
+	// Rückgabe der berechneten Pixelanzahl
+	return distancePixels;
+}
+
+void SnailRunner::calculateOrientation(double value)
+{
+	// Add the value to the current orientation
+	orientation += value;
+
+	// Normalize the orientation to be within the range [0, 359]
+	orientation = fmod(orientation, 360.0);
+	if (orientation < 0.0)
+	{
+		orientation += 360.0;
+	}
+	cout << "Orientation ist: " << orientation << endl;
+}
+
+double SnailRunner:: ImpulseToDistance(double lapdistance_livemap)
+{
+	// distance in cm
+	double distance;
+	distance = ((lapdistance_livemap / 60.0) / 2.0)*M_PI*0.05 * 100; // multipliziere 100, um von m zu cm umzuwandeln
+	return distance;
+}
+
+double SnailRunner::impulse_in_grad(double impulse)
+{
+	double ergebnis = 0;
+	ergebnis = impulse / radUmdrehungproGrad / uebersetzungsverhaeltnis_getriebe / grad_in_impulse;
+	return ergebnis;
+}

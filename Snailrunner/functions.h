@@ -28,6 +28,9 @@ void resetDistance(SnailRunner* robot);
 void resetEncoder(SnailRunner* robot);
 void addtoDistance(SnailRunner* robot);
 
+
+
+
 //Log Functions
 void logStartConditions(SnailRunner* robot, std::ofstream &file);
 void logLapBanner(SnailRunner* robot, std::ofstream &file);

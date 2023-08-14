@@ -139,7 +139,9 @@
     <ClCompile Include="ObstacleStateMachine.cpp" />
     <ClCompile Include="SearchStateMachine.cpp" />
     <ClCompile Include="SFMLmap.cpp" />
+    <ClCompile Include="SFMLobstacle.cpp" />
     <ClCompile Include="SFMLrunner.cpp" />
+    <ClCompile Include="SFMLwaypoint.cpp" />
     <ClCompile Include="SnailRunner.cpp" />
     <ClCompile Include="StartLauferMachine.cpp" />
     <ClCompile Include="StartStateMachine.cpp" />
@@ -199,7 +201,9 @@
     <ClInclude Include="ObstacleStateMachine.h" />
     <ClInclude Include="SearchStateMachine.h" />
     <ClInclude Include="SFMLmap.h" />
+    <ClInclude Include="SFMLobstacle.h" />
     <ClInclude Include="SFMLrunner.h" />
+    <ClInclude Include="SFMLwaypoint.h" />
     <ClInclude Include="SnailRunner.h" />
     <ClInclude Include="StartLauferMachine.h" />
     <ClInclude Include="StartStateMachine.h" />
